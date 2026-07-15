@@ -50,7 +50,7 @@ APP_ID = "Usagemaxxer"  # stable identity: config dir, mutex, startup .cmd — d
                         # re-case, or existing installs would orphan their config
 TAGLINE_LEAD = "Coding at "   # tagline, drawn in two colors in the masthead
 TAGLINE_HOT = "REDLINE"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 POLL_SECONDS = 300  # 5 minutes
 HOME = Path.home()
 MAX_RESPONSE_BYTES = 1024 * 1024  # Usage payloads are small; never buffer an unbounded response.

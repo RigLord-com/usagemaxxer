@@ -1,7 +1,7 @@
 # UsageMaxxer - Current State
 
-Status as of **2026-07-15**: **v1.0.0 release candidate; security remediation
-complete; not publicly released**.
+Status as of **2026-07-15**: **v1.0.1 published** (v1.0.0 was the first
+public release; security remediation complete).
 
 This document records current product and release state. It is not a development
 diary, incident history, or full technical specification.
@@ -57,18 +57,13 @@ shows only detected, enabled providers.
 
 ## Release State
 
-No public Git tag, GitHub Release, or downloadable binary currently exists.
-Until the first release is published, users should run from source.
+v1.0.0 and v1.0.1 are published on GitHub Releases with a downloadable
+`.exe`, checksum, license, and third-party notices.
 
 The release workflow uses hash-locked dependencies and SHA-pinned Actions,
 runs tests and version validation, builds the executable, publishes a checksum,
-creates a provenance attestation, verifies the downloaded artifact, and prepares
-a draft release with license and third-party notices.
-
-## Release Blockers
-
-1. Create the clean public history from the final reviewed tree.
-2. Create and publish the first release after review.
+creates a provenance attestation, and verifies the downloaded artifact. It
+prepares a draft release; publishing the draft remains a manual step.
 
 See [`README.md`](README.md) for installation and trust details, and
 [`SPEC.md`](SPEC.md) for the original pre-build design reference.

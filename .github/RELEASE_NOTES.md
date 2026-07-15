@@ -1,7 +1,14 @@
-# UsageMaxxer v1.0.0
+# UsageMaxxer
 
 A Windows system-tray widget for subscription usage on Claude Code and Codex,
 shown as race-car style analog gauges.
+
+## What's new in this release
+
+- Tray icon fills its slot more fully and has a fixed red rim matching the
+  app's branding, instead of the previous grey rim.
+- Panel gauge tick marks are now evenly spaced at every 10%, alternating
+  small/big -- previously they bunched together near the 25/75 marks.
 
 ## What it does
 
