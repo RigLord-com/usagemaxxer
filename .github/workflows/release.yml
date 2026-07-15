@@ -106,4 +106,4 @@ jobs:
           dist/THIRD_PARTY_NOTICES.md
           --title "$env:RELEASE_TAG"
           --draft
-          --generate-notes
+          --notes-file .github/RELEASE_NOTES.md
