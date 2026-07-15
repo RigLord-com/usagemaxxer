@@ -23,13 +23,8 @@ usage limits on the AI coding tools you're logged into — **Claude Code** and
 
 ## Install
 
-There is currently no public binary release. Until one is published, use
-[Run from source](#run-from-source). Published binaries will appear on the
-[Releases page](../../releases).
-
-When a binary is available:
-
-1. Download **`UsageMaxxer.exe`** and its `.sha256` file from the release.
+1. Download **`UsageMaxxer.exe`** and its `.sha256` file from the
+   [latest release](../../releases/latest).
 2. Verify the checksum, then double-click the executable. It lands in your
    system tray (the `^` overflow area).
 3. **SmartScreen note.** The app is open-source but **unsigned**, so Windows

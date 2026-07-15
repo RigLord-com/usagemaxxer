@@ -7,9 +7,10 @@ already stores locally, and calls that provider's own usage endpoint. Open
 source. Part of the RigLord ecosystem.
 
 Status: **finalized for build** (2026-07-11) — this is the original pre-build
-spec, kept for reference. It was built as a **v1.0.0 release candidate** but has
-not been publicly released. For what was implemented — and where it diverged from this spec
-— see [`CURRENT-STATE.md`](CURRENT-STATE.md). Two decisions below evolved during
+spec, kept for reference. It was built and publicly released, starting at
+v1.0.0. For what was implemented, current release status — and where it
+diverged from this spec — see [`CURRENT-STATE.md`](CURRENT-STATE.md), the
+live source of truth. Two decisions below evolved during
 the build: the panel became **per-provider bands**, not the aligned Session/Weekly
 grid described under "Layout"; and **Codex now reports a Weekly window only** (its
 ~5h `secondary_window` was retired upstream). The widget also now writes Claude's

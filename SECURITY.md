@@ -12,5 +12,6 @@ within seven days.
 
 ## Supported Versions
 
-No public version has been released yet. Security fixes apply to the current
-release candidate until a versioned support policy is published.
+Security fixes apply to the latest published release only. This is a small,
+early-stage project without the maintenance capacity to backport fixes to
+older versions -- upgrade to the latest release.
