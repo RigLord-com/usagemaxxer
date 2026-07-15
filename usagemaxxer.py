@@ -973,7 +973,6 @@ class WidgetApp:
         d = ImageDraw.Draw(img)
         cx, cy, r = SS // 2, SS // 2, 27 * sc
         pct = self._worst_util()
-        col = zone_color(pct)
 
         d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=DISC, outline=RIMLIGHT, width=3 * sc)
 
@@ -984,16 +983,17 @@ class WidgetApp:
             d.arc([cx - radius, cy - radius, cx + radius, cy + radius],
                   a0, a1, fill=color, width=width)
 
+        # fixed green/amber/red zone track at full thickness -- always all
+        # three colors, doesn't fill/change with pct. The needle alone shows
+        # the current reading, like a real gauge's colored zones + pointer.
         track_r = r - 8 * sc
-        arc(track_r, 0, 100, TRACK, 7 * sc)          # dim full track
-        if pct > 0:
-            arc(track_r, 0, pct, col, 7 * sc)        # filled 0→pct ("how full")
+        for a, b, zc in ((0, AMBER_AT, GREEN), (AMBER_AT, RED_AT, AMBER), (RED_AT, 100, RED)):
+            arc(track_r, a, b, zc, 7 * sc)
 
-        # needle + hub in bright white (red at redline)
+        # needle + hub, always white for contrast against any zone color
         th = math.radians(_gauge_angle(pct))
-        ncol = RED if pct >= RED_AT else NEEDLE
         d.line([cx, cy, cx + (r - 11 * sc) * math.cos(th), cy - (r - 11 * sc) * math.sin(th)],
-               fill=ncol, width=4 * sc)
+               fill=NEEDLE, width=4 * sc)
         d.ellipse([cx - 5 * sc, cy - 5 * sc, cx + 5 * sc, cy + 5 * sc], fill=NEEDLE)
         return img.resize((S, S), Image.LANCZOS)
 
