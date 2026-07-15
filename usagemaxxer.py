@@ -69,7 +69,6 @@ GREEN = "#3ec16a"
 AMBER = "#f5a524"
 RED = "#f0393e"
 DISC = "#1b1c20"        # icon disc body
-RIMLIGHT = "#e9eaed"    # icon rim highlight (reads on dark taskbars)
 
 # Alert thresholds (fixed for v1): amber >= 70%, red >= 90%.
 AMBER_AT = 70
@@ -706,11 +705,11 @@ def render_gauge(pct: float, r: int, stale: bool = False, scale: int = 3):
     ring_r = R - 1 * scale
     for a, b, zc in ((0, AMBER_AT, GREEN), (AMBER_AT, RED_AT, AMBER), (RED_AT, 100, RED)):
         arc(ring_r, a, b, zc, 2 * scale)
-    # ticks: minor every 10%, major at 0/25/50/75/100
-    for p in range(0, 101, 5):
-        major = p % 25 == 0
-        if not major and p % 10:
-            continue
+    # ticks every 10%, alternating small/big so spacing reads evenly. Majors
+    # at 0/25/50/75/100 used to bunch 20-25-30 together while 30-40 read
+    # twice as wide -- alternating on the same 10% grid fixes that.
+    for p in range(0, 101, 10):
+        major = p in (10, 30, 50, 70, 90)
         th = math.radians(_gauge_angle(p))
         outer = track_r + 3 * scale
         inner = track_r - (7 * scale if major else 4 * scale)
@@ -963,18 +962,19 @@ class WidgetApp:
     def _draw_icon(self):
         from PIL import Image, ImageDraw
 
-        # Drawn 4× and downsampled with LANCZOS for a crisp tray glyph. Keeps
-        # the proven contrast treatment: a filled dark disc reads on LIGHT
-        # taskbars, a bright rim reads on DARK ones.
+        # Drawn 4× and downsampled with LANCZOS for a crisp tray glyph. A
+        # filled dark disc reads on light taskbars; the red rim -- matching
+        # the static branding icons -- reads on dark ones and is fixed, not
+        # tied to current usage (one metric redlining isn't a hard blocker).
         sc = 4
         S = 64
         SS = S * sc
         img = Image.new("RGBA", (SS, SS), (0, 0, 0, 0))
         d = ImageDraw.Draw(img)
-        cx, cy, r = SS // 2, SS // 2, 27 * sc
+        cx, cy, r = SS // 2, SS // 2, 30 * sc  # tight margin -- fills the tray slot
         pct = self._worst_util()
 
-        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=DISC, outline=RIMLIGHT, width=3 * sc)
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=DISC, outline=RED, width=3 * sc)
 
         def arc(radius, p0, p1, color, width):
             a0, a1 = _pil_angle(p0), _pil_angle(p1)
